@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo en uno</title>
+    <link rel="stylesheet" href="fourInOne.css">
+</head>
+<body>
+
+<div id="cont">    
+
+      <!--Primera Sección-->
+<div id="izq1" class="sect">
+
+
+  <h1 class="titulo">📸 Imagen Aleatoria</h1>
+
+
+  <img id="imagen" src="" alt="Imagen aleatoria">
+  <br>
+  <button onclick="nuevaImagen()">Nueva Imagen</button>
+
+</div>
+
+    <!--Segunda Sección-->
+
+<div id="der2" class="sect">
+
+
+
+
+
+
+  
+
+</div>
+
+    <!--Tercera Sección-->
+
+
+<div id="izq2" class="sect">
+
+  <h1 class="titulo">Información de Países</h1>
+
+  <label for="pais">Selecciona un país:</label>
+  <select id="pais" class="sel">
+    <option value="">Cargando países...</option>
+  </select>
+
+  <div id="infoPais"></div>
+
+</div>
+
+    <!--Cuarta Sección-->
+
+<div id="der2" class="sect">
+
+
+
+   <h1 class="titulo">App del clima</h1>
+   <input type="text" id="ciudad" placeholder="Ingrese una ciudad">
+   <button id="buscar">Buscar</button>
+    <div id="resultado"></div>
+
+
+</div>
+</div>
+<script src="fourInOne.js"></script>
+</body>
+</html>

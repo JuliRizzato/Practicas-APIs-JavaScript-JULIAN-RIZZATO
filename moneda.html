@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conversor de Monedas 💱</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f7ff;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 { color: #333; }
+    select, input, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 1em;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-size: 1.4em;
+      color: #0077cc;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>💱 Conversor de Monedas</h1>
+  <input type="number" id="cantidad" placeholder="Cantidad" value="1" min="0" />
+  <select id="desde"></select>
+  <select id="hacia"></select>
+  <button onclick="convertir()">Convertir</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    const selectDesde = document.getElementById('desde');
+    const selectHacia = document.getElementById('hacia');
+    const resultado = document.getElementById('resultado');
+
+    // Cargar monedas disponibles desde Frankfurter API
+    async function cargarMonedas() {
+      try {
+        const res = await fetch('https://api.frankfurter.app/currencies');
+        const data = await res.json();
+        for (let code in data) {
+          const opt1 = document.createElement('option');
+          const opt2 = document.createElement('option');
+          opt1.value = opt2.value = code;
+          opt1.textContent = opt2.textContent = `${code} - ${data[code]}`;
+          selectDesde.appendChild(opt1);
+          selectHacia.appendChild(opt2);
+        }
+        selectDesde.value = 'USD';
+        selectHacia.value = 'EUR';
+      } catch (err) {
+        resultado.textContent = "⚠️ Error al cargar monedas.";
+      }
+    }
+
+    // Convertir usando Frankfurter API
+    async function convertir() {
+      const cantidad = parseFloat(document.getElementById('cantidad').value);
+      const from = selectDesde.value;
+      const to = selectHacia.value;
+      if (!cantidad || cantidad <= 0) {
+        resultado.textContent = "Ingresa una cantidad válida.";
+        return;
+      }
+      try {
+        const res = await fetch(`https://api.frankfurter.app/latest?amount=${cantidad}&from=${from}&to=${to}`);
+        const data = await res.json();
+        const valor = data.rates[to];
+        resultado.textContent = `${cantidad} ${from} = ${valor.toFixed(2)} ${to}`;
+      } catch (err) {
+        resultado.textContent = "⚠️ Error al convertir.";
+        console.error(err);
+      }
+    }
+
+    cargarMonedas();
+  </script>
+</body>
+</html>
