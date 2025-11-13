@@ -29,6 +29,7 @@
             margin: 5px 0;
             border-radius: 5px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
             box-shadow: 0 2px 5px #0003;
         }
@@ -46,36 +47,60 @@
     const boton = document.getElementById('agregar');
     const lista = document.getElementById('lista');
 
+
+
     boton.addEventListener('click', () => {
         const texto = input.value.trim(); // Quita espacios innecesarios
 
         if (texto !== '') {
             // Crear un nuevo <li>
-            const li = document.createElement('li');
-            li.textContent = texto;
+            const itemLista = document.createElement('li');
 
             // Crear botón de eliminar
             const botonBorrar = document.createElement('button');
             botonBorrar.textContent = '❌';
             botonBorrar.style.marginLeft = '10px';
 
-            // Cuando se hace clic en eliminar → remover el li
+
+            //Crear la hora en la que se subió la nota
+            const ahora = new Date();
+            const horas = String(ahora.getHours()).padStart(2, '0');
+            const minutos = String(ahora.getMinutes()).padStart(2, '0');
+            const dia = String(ahora.getDay());
+            const mes = String(ahora.getMonth());
+            const año = String(ahora.getFullYear());
+
+            const textoSpan = document.createElement('span');
+            textoSpan.textContent = texto;
+
+            const horaSpan = document.createElement('span');
+            horaSpan.textContent = `${horas}:${minutos}   ${dia}/${mes}/${año}`;
+            horaSpan.classList.add('hora'); // Para darle estilo en CSS
+
+            itemLista.appendChild(textoSpan);
+            itemLista.appendChild(horaSpan);
+
+            // Cuando se hace clic en eliminar → remover el itemLista
             botonBorrar.addEventListener('click', () => {
-                li.remove();
+                itemLista.remove();
             });
 
             // Agregar el botón al li
-            li.appendChild(botonBorrar);
+            itemLista.appendChild(botonBorrar);
 
             // Agregar el li a la lista
-            lista.appendChild(li);
+            lista.appendChild(itemLista);
 
             // Limpiar el input
             input.value = '';
         }
     });
 
+
+//Hacer que se vea bonita la nota
+
 </script>
+
 
     
 </body>
