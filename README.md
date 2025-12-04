@@ -5,6 +5,7 @@ Este proyecto es una colección de mini-aplicaciones creadas con HTML, CSS y Jav
 El archivo principal index.html funciona como un menú que permite navegar entre las distintas herramientas.
 
 🚀 Contenido del Proyecto
+
 🔎 1. Buscador de Usuarios de GitHub
 
 Permite buscar usuarios mediante la GitHub API.
